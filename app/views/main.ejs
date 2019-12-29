@@ -1,0 +1,60 @@
+<%
+function status2textColor (status) {
+  switch (status) {
+    case 'online':
+      return 'success'
+    case 'stopping':
+    case 'stopped':
+    case 'errored':
+      return 'danger'
+    default:
+      return 'warning'
+  }
+}
+%>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="shortcut icon" href="https://emrio.fr/assets/img/logo.png">
+    <title>Emrio :: Status</title>
+  </head>
+  <body>
+    <nav class="navbar-dark bg-dark py-3 mb-5">
+      <ul class="nav justify-content-center">
+        <li>
+          <img src="https://emrio.fr/assets/img/logo.gif" alt="Emrio Status" width="50px" class="rounded">
+        </li>
+      </ul>
+    </nav>
+    <div class="container">
+      <div class="text-center">
+        <h1>Emrio Status</h1>
+      </div>
+      <hr>
+      <div class="container my-4">
+        <div class="p-4 text-justify">
+          <table class="table table-borderless mx-auto">
+            <thead>
+              <tr>
+                <th scope="col">Service name</th>
+                <th scope="col">Uptime</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (const status of statuses) { %>
+                <tr>
+                  <td><%= status.name %></td>
+                  <td><%= status.uptime %></td>
+                  <td><span class="text-<%= status2textColor(status.status) %>"><%= status.status %></span></td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
