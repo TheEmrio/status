@@ -1,0 +1,11 @@
+{
+  "hostname": "status.emrio.fr",
+  "port": 5016,
+  "log": "self",
+  "name": "@theemrio/status",
+  "updateInterval": 30000,
+  "viewEngine": "ejs",
+  "paths": {
+    "views": "./app/views"
+  }
+}
