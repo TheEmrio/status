@@ -3,7 +3,7 @@
   "port": 5016,
   "log": "self",
   "name": "@theemrio/status",
-  "updateInterval": 30000,
+  "updateInterval": 1500,
   "viewEngine": "ejs",
   "paths": {
     "views": "./app/views"
