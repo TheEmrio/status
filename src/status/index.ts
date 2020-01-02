@@ -1,8 +1,6 @@
 import pm2 from 'pm2'
 import moment from 'moment'
-import debug from 'debug'
 import config from '../config'
-const log = debug('status:status')
 
 export interface ServiceStatus {
   name: string
@@ -29,7 +27,6 @@ function getServiceStatuses (): Promise<ServiceStatus[]> {
 }
 
 async function update (): Promise<void> {
-  log('Updating service data...')
   cache.status = await getServiceStatuses()
 }
 
