@@ -16,15 +16,36 @@ function status2textColor (status) {
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="description" content="Check the status of services provided by Emrio in real-time">
+    <meta name="keywords" content="Emrio,emrio.fr,status.emrio.fr,status,real-time,services,uptime">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="shortcut icon" href="https://emrio.fr/assets/img/logo.png">
-    <title>Emrio :: Status</title>
+    <title>Emrio Status</title>
+    <!-- Facebook Open Graph tags -->
+    <meta property="og:title" content="Emrio Status">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Emrio Status">
+    <meta property="og:url" content="https://status.emrio.fr">
+    <meta property="og:description" content="Check the status of services provided by Emrio in real-time">
+    <meta property="og:image" content="https://static.emrio.fr/emrio-status-banner.png">
+    <meta property="og:keywords" content="Emrio,emrio.fr,status.emrio.fr,status,real-time,services,uptime">
+    <!-- Twitter Card tags -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Emrio Status">
+    <meta property="twitter:url" content="https://status.emrio.fr">
+    <meta property="twitter:description" content="Check the status of services provided by Emrio in real-time">
+    <meta property="twitter:image" content="https://static.emrio.fr/emrio-status-banner.png">
+    <meta property="twitter:site" content="@theemrio">
+    <meta property="twitter:site:id" content="@theemrio">
+    <meta property="twitter:creator" content="@theemrio">
+    <meta property="twitter:creator:id" content="@theemrio">
   </head>
   <body>
     <nav class="navbar-dark bg-dark py-3 mb-5">
       <ul class="nav justify-content-center">
         <li>
-          <img src="https://emrio.fr/assets/img/logo.gif" alt="Emrio Status" width="50px" class="rounded">
+          <img src="https://emrio.fr/assets/img/logo.gif" alt="Emrio Status" width="50" class="rounded">
         </li>
       </ul>
     </nav>
@@ -33,7 +54,24 @@ function status2textColor (status) {
         <h1>Emrio Status</h1>
       </div>
       <hr>
-      <div class="container my-4">
+      <div class="container my-4 lead">
+        <div class="container">
+          <% if (statuses.every(app => app.status === 'online')) { %>
+            <div class="container bg-success p-3 border rounded text-light" style="width: 80%">
+              <p class="p-0 m-0 font-weight-bold">
+                <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span class="ml-2">All services are operational</span>
+              </p>
+            </div>
+          <% } else { %>
+            <div class="container bg-danger p-3 border rounded text-light" style="width: 80%">
+              <p class="p-0 m-0 font-weight-bold">
+                <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                <span class="ml-2">Some services encounter issues</span>
+              </p>
+            </div>
+          <% } %>
+        </div>
         <div class="p-4 text-justify">
           <table class="table table-borderless mx-auto">
             <thead>
@@ -44,11 +82,11 @@ function status2textColor (status) {
               </tr>
             </thead>
             <tbody>
-              <% for (const status of statuses) { %>
+              <% for (const app of statuses) { %>
                 <tr>
-                  <td><%= status.name %></td>
-                  <td><%= status.uptime %></td>
-                  <td><span class="text-<%= status2textColor(status.status) %>"><%= status.status %></span></td>
+                  <td><%= app.name %></td>
+                  <td><%= app.uptime %></td>
+                  <td><span class="text-<%= status2textColor(app.status) %>"><%= app.status %></span></td>
                 </tr>
               <% } %>
             </tbody>
